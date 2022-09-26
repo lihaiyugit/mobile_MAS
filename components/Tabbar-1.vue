@@ -73,23 +73,23 @@ export default {
     //   }
     // });
 
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.initgoRightArrow();
-      });
-    });
+    // this.$nextTick(() => {
+    //   setTimeout(() => {
+    //     this.initgoRightArrow();
+    //   });
+    // });
   },
   methods: {
     //初始化判断是否可以向右滚动
-    initgoRightArrow() {
-      const currentScrollWidth = document.querySelector(".tabs").clientWidth;
-      const canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
-      //如果最后一个流程图标已经展示出来，则停止滚动
-      if (this.currentClickNumber + canNumber >= this.tabList.length - 1) {
-        this.nextIcon = false;
-        return;
-      }
-    },
+    // initgoRightArrow() {
+    //   const currentScrollWidth = document.querySelector(".tabs").clientWidth;
+    //   const canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
+    //   //如果最后一个流程图标已经展示出来，则停止滚动
+    //   if (this.currentClickNumber + canNumber >= this.tabList.length - 1) {
+    //     this.nextIcon = false;
+    //     return;
+    //   }
+    // },
     //点击tabs
     oNitem(url) {
       document.body.scrollTop = 0;

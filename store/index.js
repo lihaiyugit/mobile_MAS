@@ -17,6 +17,9 @@ export const mutations = {
     state.userInfo = userInfo;
     this.$cookies.set('userInfo', userInfo)
   },
+  getUserInfo(state) {
+    state.userInfo =  this.$cookies.get('userInfo');
+  },
 
   setSubTabId(state, data) {
     state.subTabId = data
@@ -27,6 +30,8 @@ export const actions={
   nuxtServerInit(store,content){
     //store:vuex上下文 content:nuxt上下文
     // store.commit('setToken','admin');
+    store.commit('getToken');
+    store.commit('getUserInfo');
     store.commit('setSubTabId', this.$cookies.get('subTabId'));
     console.log(store.state.subTabId, 'nuxtServerInit')
   }
