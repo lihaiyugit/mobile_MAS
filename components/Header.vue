@@ -3,19 +3,15 @@
     <nuxt-link to="/">
       <img class="logo" src="../static/images/logo.png" alt="" />
     </nuxt-link>
-    <div class="search-box">
+    <div class="search-box" @click="onSearch">
       <van-search
         v-model="searchValue"
-        placeholder="输入搜索的内容"
+        :placeholder="defaultValue"
         shape="round"
         @search="onSearch"
         left-icon=""
         readonly
       >
-        <!-- <div slot="right-icon" @click="onSearch"> -->
-        <!-- <van-icon name="search" size="20" /> -->
-        <!-- <i class="iconfont icon-icon-sousuo"></i> -->
-        <!-- </div> -->
       </van-search>
       <svg
         @click="onSearch"
@@ -85,9 +81,9 @@
           <div class="search-box">
             <van-search
               v-model="searchValue"
-              placeholder="输入搜索的内容"
+              :placeholder="defaultValue"
               shape="round"
-              @search="onSearch"
+              @input="onSearch"
               left-icon=""
             >
               <!-- <div slot="right-icon" @click="onSearch"> -->
@@ -471,6 +467,7 @@ export default {
   data() {
     return {
       searchValue: "",
+      defaultValue:"输入搜索的内容",
       show: false, //是否展示首页列表弹框
       tabList: [], //导航栏列表
       loginShow: false, //手机号登录弹框是否展示
@@ -502,6 +499,10 @@ export default {
   },
   created() {
     console.log(this.$store.state.userInfo, "$store.state.userInfo");
+   let searchValue = this.$cookies.get("searchValue");
+    if (searchValue) {
+      this.defaultValue = searchValue;
+    }
   },
   mounted() {},
 
@@ -509,7 +510,10 @@ export default {
     ...mapMutations(["setToken", "setUserInfo"]),
     //点击搜索
     onSearch() {
-      console.log(this.searchValue);
+      console.log(this.searchValue,'---');
+      this.$router.push({
+        name: "search",
+      });
     },
     //首页列表弹框
     showPopup() {

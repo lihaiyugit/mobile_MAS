@@ -1,0 +1,165 @@
+.page-search {
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+
+  .search-header {
+    padding: 5px 20px;
+    position: relative;
+
+    .search-icon {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      right: 76px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .van-search {
+      padding: 0px;
+    }
+
+    .van-search__action {
+      padding: 0px 0px 0px 15px;
+      color: #333333;
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
+
+    }
+
+    /deep/.van-field__control {
+      padding-bottom: 1px;
+      width: 80%;
+    }
+
+    .van-search__action:active {
+      background-color: #fff;
+    }
+
+    input {
+      border: none;
+      font-size: 14px;
+      font-family: PingFangSC, PingFangSC-Regular;
+      font-weight: 400;
+      color: #212223;
+      line-height: 20px;
+      letter-spacing: -0.34px;
+    }
+
+    input:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+
+
+
+    input::-webkit-input-placeholder {
+      /* WebKit browsers */
+      font-size: 14px;
+      font-weight: 400;
+      color: #afafaf;
+      line-height: 22px;
+    }
+
+    input:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      font-size: 14px;
+      font-weight: 400;
+      color: #afafaf;
+      line-height: 22px;
+
+    }
+
+    input::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      font-size: 14px;
+      font-weight: 400;
+      color: #afafaf;
+      line-height: 22px;
+    }
+
+    input:-ms-input-placeholder {
+      /* Internet Explorer 10+ */
+      font-size: 14px;
+      font-weight: 400;
+      color: #afafaf;
+      line-height: 22px;
+
+    }
+  }
+
+  .search-main {
+    padding: 0px 20px;
+
+    .search-history {
+      padding-bottom: 20px;
+
+      .history-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0px 22px 0px;
+
+        .history-header-l {
+          font-size: 12px;
+          font-weight: 400;
+          text-align: left;
+          color: #afafaf;
+          line-height: 14px;
+        }
+
+        .history-header-r {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .history-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          padding: 10px 15px;
+          background: #f7f8fa;
+          border-radius: 16px;
+          font-size: 12px;
+          font-weight: 400;
+          color: #666666;
+          line-height: 12px;
+          margin-right: 6px;
+          margin-bottom: 8px;
+
+          img {
+            width: 16px;
+            height: 9px;
+          }
+
+          .rotate {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+
+  //搜索关键结果推荐
+  .recommend-main {
+    .recommend-list {
+      margin-top: 5px;
+      border-top: 1px solid #e7e7e7;
+      li {
+        padding: 0px 40px 0px 20px;
+        height: 45px;
+        line-height: 45px;
+        border-bottom: 1px solid #e7e7e7;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: left;
+        color: #333333;
+      }
+    }
+  }
+}
