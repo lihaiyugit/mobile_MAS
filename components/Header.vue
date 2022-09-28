@@ -348,7 +348,7 @@
               </div>
               <!-- <div v-show="sendState == 1" class="get-code">发送中…</div> -->
               <div v-show="sendState == 2" class="get-code">
-                {{ this.countDown.count }}后重新获取发送
+                {{ this.countDown.count }}后重新获取
               </div>
               <div
                 v-show="sendState == 3"
@@ -498,7 +498,7 @@ export default {
     }
   },
   created() {
-    console.log(this.$store.state.userInfo, "$store.state.userInfo");
+    // console.log(this.$store.state.userInfo, "$store.state.userInfo");
    let searchValue = this.$cookies.get("searchValue");
     if (searchValue) {
       this.defaultValue = searchValue;

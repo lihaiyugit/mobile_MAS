@@ -6,7 +6,7 @@
         show-action
         shape="round"
         autofocus
-        placeholder="输入搜索的内容"
+        :placeholder="defaultValue"
         @input="onSearch"
         @cancel="onCancel"
         left-icon=""
@@ -43,7 +43,13 @@
           </div>
         </div>
         <ul class="history-list" id="tagList">
-          <li v-for="(item, index) in historyList" :key="index">{{ item }}</li>
+          <li
+            v-for="(item, index) in historyList"
+            :key="index"
+            @click="getHistory(item)"
+          >
+            {{ item }}
+          </li>
           <li v-if="showBtnZK && showDivZK" @click="restoreTags">
             <img src="../static/images/icons/more.png" alt="" />
           </li>
@@ -56,11 +62,21 @@
         <div class="history-header">
           <div class="history-header-l">站内热词</div>
           <div class="history-header-r">
-            <img src="../static/images/icons/update.png" alt="" />
+            <img
+              src="../static/images/icons/update.png"
+              alt=""
+              @click="chooseEvent()"
+            />
           </div>
         </div>
         <ul class="history-list">
-          <li v-for="(item, index) in hotList" :key="index">{{ item }}</li>
+          <li
+            v-for="(item, index) in newHotList"
+            :key="index"
+            @click="getHot(item)"
+          >
+            {{ item }}
+          </li>
         </ul>
       </div>
     </div>
@@ -74,6 +90,7 @@ export default {
   data() {
     return {
       searchValue: "", //搜索词
+      defaultValue: "输入搜索的内容",
       historyList: [
         "管理会计咨询",
         "数字化转型咨询",
@@ -110,7 +127,14 @@ export default {
         "合并报表",
         "信息化",
         "财务管理",
+        "财务数字化",
+        "成本管理",
+        "管理会计",
+        "合并报表",
+        "信息化",
+        "财务管理",
       ], //站内热词列表
+      newHotList: [], //站内热词列表
       showBtnZK: false,
       showDivZK: false,
       recommendList: [],
@@ -124,12 +148,13 @@ export default {
     }
     let searchValue = this.$cookies.get("searchValue");
     if (searchValue) {
-      this.searchValue = searchValue;
+      this.defaultValue = searchValue;
     }
   },
   mounted() {
     this.cuttingTags();
     this.focusEvent();
+    this.chooseEvent();
   },
   methods: {
     //解决van-search自动聚焦失效问题
@@ -165,14 +190,17 @@ export default {
     },
     //点击确认搜索
     onConfirmSearch() {
-      console.log(this.searchValue, "999");
+      this.searchValue = this.searchValue == ""
+        ? this.$cookies.get("searchValue")
+        : this.searchValue;
+        console.log(this.searchValue)
       this.$cookies.set("searchValue", this.searchValue, config.cookieConfig);
       //将搜索关键字添加到历史记录
       if (this.newHistoryList.indexOf(this.searchValue) !== -1) {
         // this.historyList.splice(this.historyList.indexOf(this.searchValue), 1);
       } else {
         this.newHistoryList.unshift(this.searchValue);
-        console.log(this.newHistoryList, "this.historyList");
+        // console.log(this.newHistoryList, "this.historyList");
       }
       //存储到本地
       this.$cookies.set(
@@ -180,7 +208,6 @@ export default {
         this.newHistoryList,
         config.cookieConfig
       );
-      //  console.log(this.$cookies.get('searchHistory'),'999449')
       this.$router.push({
         name: "search-list",
       });
@@ -257,6 +284,48 @@ export default {
       this.$router.push({
         path: `/${url}/${id}`,
       });
+    },
+    //点击每一个历史搜索
+    getHistory(item) {
+      this.searchValue = item;
+      //存储到本地
+      this.$cookies.set("searchValue", this.searchValue, config.cookieConfig);
+      this.$router.push({
+        name: "search-list",
+      });
+    },
+    //点击每一个站内热词
+    getHot(item) {
+      console.log(item);
+      this.searchValue = item;
+      //存储到本地
+      this.$cookies.set("searchValue", this.searchValue, config.cookieConfig);
+      this.$router.push({
+        name: "search-list",
+      });
+    },
+    //点击换一批
+    chooseEvent() {
+      let maxNum = this.hotList.length; //计算数据长度
+      let r1 = parseInt(Math.random() * (maxNum - 0) + 0); //取【0-数据长度】内的整数随机数
+      let r2 = parseInt(Math.random() * (maxNum - 0) + 0);
+      let r3 = parseInt(Math.random() * (maxNum - 0) + 0);
+      let r4 = parseInt(Math.random() * (maxNum - 0) + 0);
+      let r5 = parseInt(Math.random() * (maxNum - 0) + 0);
+      let r6 = parseInt(Math.random() * (maxNum - 0) + 0);
+      let r7 = parseInt(Math.random() * (maxNum - 0) + 0);
+      //务必先清空列表数据
+      this.newHotList = [];
+      //重新取四组数据
+      this.newHotList.push(this.hotList[r1]);
+      this.newHotList.push(this.hotList[r2]);
+      this.newHotList.push(this.hotList[r3]);
+      this.newHotList.push(this.hotList[r4]);
+      this.newHotList.push(this.hotList[r5]);
+      this.newHotList.push(this.hotList[r6]);
+      this.newHotList.push(this.hotList[r7]);
+      //重新赋值
+      // console.log(this.newHotList,'newList')
     },
   },
 };
