@@ -215,7 +215,7 @@ export default {
     // linkExactActiveClass: 'nuxt-link-exact-active',
     // mode: 'hash',
     // base: '/static/', // 使用 './' 主要是为了适配以相对路径打开的静态站点
-    // middleware:'midd',//全局生效
+    middleware:'midd',//全局生效
     // scrollBehavior(to, from, savedPosition) {
     //   return { x: 0, y: 0 }
     // }
