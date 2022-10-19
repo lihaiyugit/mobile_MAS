@@ -166,10 +166,12 @@
               <dd>订阅</dd>
             </dl>
             <dl class="item">
-              <dt>
-                <img src="../static/images/ktyj.png" alt="" />
-              </dt>
-              <dd>课题研究</dd>
+              <nuxt-link to="/ktyj">
+                <dt>
+                  <img src="../static/images/ktyj.png" alt="" />
+                </dt>
+                <dd>课题研究</dd>
+              </nuxt-link>
             </dl>
             <dl class="item">
               <dt>
@@ -464,10 +466,16 @@ import { mapMutations } from "vuex";
 import { Toast } from "vant";
 import config from "@/config/index";
 export default {
+  props: {
+    islogin: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       searchValue: "",
-      defaultValue:"输入搜索的内容",
+      defaultValue: "输入搜索的内容",
       show: false, //是否展示首页列表弹框
       tabList: [], //导航栏列表
       loginShow: false, //手机号登录弹框是否展示
@@ -488,29 +496,57 @@ export default {
       changeTip: false, //是否展示修改成功弹框
     };
   },
+  // async fetch() {
+  //   let res = await this.$axios.notNeedlogin({
+  //     className: "NavigationController",
+  //     classMethod: "getLeftNavigation",
+  //   });
+  //   if (res.bol) {
+  //     this.tabList = res.data;
+  //   }
+  // },
   async fetch() {
-    let res = await this.$axios.notNeedlogin({
-      className: "NavigationController",
-      classMethod: "getLeftNavigation",
-    });
-    if (res.bol) {
-      this.tabList = res.data;
+    if (
+      this.$store.state.tabList == undefined ||
+      this.$store.state.tabList == ""
+    ) {
+      let res = await this.$axios.notNeedlogin({
+        className: "NavigationController",
+        classMethod: "getLeftNavigation",
+      });
+      if (res.bol) {
+        this.$store.commit("setTabList", res.data);
+        return (this.tabList = res.data);
+      }
+    } else {
+      this.tabList = this.$store.state.tabList;
     }
+
+  },
+  watch: {
+    islogin: { //登录框是否展示
+      handler(value) {
+        if (value) {
+          this.loginShow = value;
+        }
+      },
+      deep: true,
+    },
   },
   created() {
     // console.log(this.$store.state.userInfo, "$store.state.userInfo");
-   let searchValue = this.$cookies.get("searchValue");
+    let searchValue = this.$cookies.get("searchValue");
     if (searchValue) {
       this.defaultValue = searchValue;
     }
   },
-  mounted() {},
+  mounted() {
+  },
 
   methods: {
     ...mapMutations(["setToken", "setUserInfo"]),
     //点击搜索
     onSearch() {
-      console.log(this.searchValue,'---');
       this.$router.push({
         name: "search",
       });
@@ -530,6 +566,7 @@ export default {
       this.errTips = ""; //错误提示
       this.newPassword = ""; //新密码
       this.confirmPassWord = ""; //确认密码
+      this.$emit('onClose', false);
     },
     //点击每一个栏目
     oNitem(index, item) {

@@ -4,6 +4,7 @@ export const state = () => ({
   userName: 'admin',
   secretKey: "mas20220520",//秘钥
   subTabId: '',//二级菜单选中项id
+  tabList: [],//菜单列表
 })
 export const mutations = {
   setToken(state, token) {
@@ -24,7 +25,11 @@ export const mutations = {
   setSubTabId(state, data) {
     state.subTabId = data
     this.$cookies.set('subTabId', data)
-  }
+  },
+  setTabList(state, data) {
+    state.tabList = data
+    this.$cookies.set('tabList', data)
+  },
 }
 export const actions={
   nuxtServerInit(store,content){
@@ -33,6 +38,7 @@ export const actions={
     store.commit('getToken');
     store.commit('getUserInfo');
     store.commit('setSubTabId', this.$cookies.get('subTabId'));
-    console.log(store.state.subTabId, 'nuxtServerInit')
+    store.commit('setTabList', this.$cookies.get('tabList'));
+    // console.log(store.state.subTabId, 'nuxtServerInit')
   }
 }
