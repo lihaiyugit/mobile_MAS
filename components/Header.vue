@@ -379,7 +379,7 @@
             </div>
             <div class="form-item">
               <input
-                type="text"
+                type="password"
                 placeholder="请输入密码"
                 v-model="password"
                 @blur="passwordBlur()"
@@ -405,7 +405,7 @@
             </div>
             <div class="form-item">
               <input
-                type="text"
+                type="password"
                 placeholder="请输入新密码"
                 v-model="newPassword"
                 @blur="newPasswordBlur()"
@@ -413,7 +413,7 @@
             </div>
             <div class="form-item">
               <input
-                type="text"
+                type="password"
                 placeholder="密码确认"
                 v-model="confirmPassword"
                 @blur="confirmPasswordBlur()"
