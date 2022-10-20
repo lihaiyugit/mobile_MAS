@@ -29,8 +29,9 @@
           <!-- 有数据 -->
           <div class="tabs-content" v-if="listShowType == 1">
             <van-list
+              v-model="loading"
               :finished="finished"
-              finished-text="已经到底啦！"
+              loading-text="正在加载…"
               @load="onLoad"
             >
               <div class="item">
@@ -78,14 +79,61 @@
                   </div>
                 </div>
               </div>
+              <div class="item">
+                <div class="item-l">
+                  <img src="@/static/images/ktyj/cg_img.png" alt="" />
+                </div>
+                <div class="item-r">
+                  <h5>数字智能时代中国企业财务共享的创新与升级调研报告</h5>
+                  <p class="twoline">
+                    课题成果介绍课题成果介绍课题成果介绍课题成果介绍课题成果介绍...
+                  </p>
+                  <div class="btn-box">
+                    <button>试读</button>
+                    <button>下载</button>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-l">
+                  <img src="@/static/images/ktyj/cg_img.png" alt="" />
+                </div>
+                <div class="item-r">
+                  <h5>数字智能时代中国企业财务共享的创新与升级调研报告</h5>
+                  <p class="twoline">
+                    课题成果介绍课题成果介绍课题成果介绍课题成果介绍课题成果介绍...
+                  </p>
+                  <div class="btn-box">
+                    <button>试读</button>
+                    <button>下载</button>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="item-l">
+                  <img src="@/static/images/ktyj/cg_img.png" alt="" />
+                </div>
+                <div class="item-r">
+                  <h5>数字智能时代中国企业财务共享的创新与升级调研报告</h5>
+                  <p class="twoline">
+                    课题成果介绍课题成果介绍课题成果介绍课题成果介绍课题成果介绍...
+                  </p>
+                  <div class="btn-box">
+                    <button>试读</button>
+                    <button>下载</button>
+                  </div>
+                </div>
+              </div>
             </van-list>
+            <div class="loading-more-btn" @click="onLoad" v-show="loading">
+              {{ loadingText }}
+            </div>
           </div>
           <!-- 无数据 -->
           <div class="no-data-box" v-if="listShowType == 2">
             <img src="@/static/images/no-data.png" alt="" />
             <div class="tip">目前还没有内容哦～</div>
           </div>
-          <div class="loading-more-btn">{{ loadingText }}</div>
         </div>
       </div>
     </div>
@@ -102,15 +150,42 @@ export default {
       pageIndex: 1, //当前页
       pageSize: 6, //当前页
       total: "", //总条数
-      finished: false, //数据是否加载完毕
+      finished: true, //数据是否加载完毕
       loading: false, //true 异步操作并更新数据 数据更新完毕后，将 loading 设置成 false 加载状态结束
       // moretype: "list", //加载更多 取值 ‘list’
       listShowType: 1, // 列表显示状态 0加载中 1有数据 2无数据
       loadingText: "查看更多",
     };
   },
+  mounted() {
+    // scroll事件并监听
+    // window.addEventListener("scroll", this.dksScroll);
+  },
 
   methods: {
+    //scroll事件并监听
+    // dksScroll() {
+    //   //可视区域大小window.innerHeight
+    //   var scrollTop =
+    //     document.documentElement.scrollTop ||
+    //     window.pageYOffset ||
+    //     document.body.scrollTop; //滚动高度
+    //     console.log(scrollTop)
+    //   //"文档高度"document.body.offsetHeight 327底部高度
+    //   //判断是否滚动到底部
+    //   if (
+    //     scrollTop + window.innerHeight>=
+    //     document.body.offsetHeight
+    //   ) {
+    //     //327 表示距离底部多少的距离的开始触发loadmore效果
+    //     console.log(scrollTop + window.innerHeight,'',document.body.offsetHeight)
+    //     if (!this.loading && !this.finished) {
+    //       //防止多次加载
+    //       //  this.moretype = "list";
+    //       this.onLoad();
+    //     }
+    //   }
+    // },
     //点击课题成果列表
     cutValue(index) {
       this.current = index;
@@ -119,8 +194,10 @@ export default {
     },
     //滑动加载
     onLoad() {
+
       let pageIndex = this.pageIndex + 1;
       // this.commonData(pageIndex);
+      console.log(pageIndex);
     },
     //根据条件搜索
     getList() {

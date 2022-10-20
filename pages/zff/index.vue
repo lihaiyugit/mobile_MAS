@@ -92,6 +92,7 @@
             finished-text="已经到底啦！"
             @load="onLoad"
           >
+          <!-- <van-list v-model="loading" :finished="finished" @load="onLoad"> -->
             <li
               class="type-item"
               v-for="(item, index) in listData"
@@ -108,6 +109,25 @@
                 </div>
               </nuxt-link>
             </li>
+            <div class="more" @click="clickLoad" v-show="showlaoding&&finished">
+              <span>查看更多</span>
+              <svg
+                t="1660016701886"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="4193"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M350.354286 227.693714a47.542857 47.542857 0 0 1 60.708571-5.485714l6.582857 5.485714L686.592 496.64a47.542857 47.542857 0 0 1 5.485714 60.708571l-5.485714 6.582858-268.946286 268.946285a47.542857 47.542857 0 0 1-72.777143-60.708571l5.485715-6.582857L585.728 530.285714 350.354286 294.985143a47.542857 47.542857 0 0 1-5.485715-60.708572l5.485715-6.582857z"
+                  fill="#DB6B3A"
+                  p-id="4194"
+                ></path>
+              </svg>
+            </div>
           </van-list>
         </ul>
         <!-- 无数据 -->
@@ -116,10 +136,6 @@
           <div class="tip">目前还没有内容哦～</div>
         </div>
       </div>
-    </div>
-    <div class="more" v-show="!finished && listData.length > 0">
-      <span>查看更多</span>
-      <svg t="1660016701886" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4193" width="16" height="16"><path d="M350.354286 227.693714a47.542857 47.542857 0 0 1 60.708571-5.485714l6.582857 5.485714L686.592 496.64a47.542857 47.542857 0 0 1 5.485714 60.708571l-5.485714 6.582858-268.946286 268.946285a47.542857 47.542857 0 0 1-72.777143-60.708571l5.485715-6.582857L585.728 530.285714 350.354286 294.985143a47.542857 47.542857 0 0 1-5.485715-60.708572l5.485715-6.582857z" fill="#DB6B3A" p-id="4194"></path></svg>
     </div>
   </div>
 </template>
@@ -147,7 +163,8 @@ export default {
       tagId: "", //专业类型
       industryId: "", //行业类型
       moretype: "list", //加载更多 取值 ‘list’
-      listShowType: 1, // 列表显示状态 0加载中 1有数据 2无数据
+      listShowType: 0, // 列表显示状态 0加载中 1有数据 2无数据
+      showlaoding: true, //是否显示loading效果
     };
   },
   head() {
@@ -180,8 +197,9 @@ export default {
         industryData: res.data.industry,
         listData: res.data.articleList.articleList,
         total: res.data.articleList.articleCount,
-        // showlaoding: false,
+        showlaoding: false,
         finished: res.data.articleList.articleCount > 6 ? false : true,
+        listShowType: res.data.articleList.articleCount > 0 ? 1 : 2,
       };
     }
   },
@@ -239,6 +257,18 @@ export default {
     onLoad() {
       let pageIndex = this.pageIndex + 1;
       this.commonData(pageIndex);
+      // if (this.pageIndex >= 3) {
+      //   this.finished = true;
+      //   console.log(this.pageIndex, "000");
+      // } else {
+      //   this.commonData(pageIndex);
+      //   console.log(this.pageIndex, "1111");
+      // }
+    },
+    //点击加载
+    clickLoad() {
+      let pageIndex = this.pageIndex + 1;
+      this.commonData(pageIndex);
     },
     //根据条件搜索
     getList() {
@@ -246,6 +276,7 @@ export default {
     },
     //公共请求接口
     async commonData(pageIndex) {
+      this.showlaoding = true;
       let res = await this.$axios.notNeedlogin({
         data: {
           MenuId: this.$route.query.menuId,
@@ -268,7 +299,10 @@ export default {
           this.pageIndex = pageIndex;
         } else {
           this.finished = true; // 数据全部加载完成
+          // this.showlaoding = false;
         }
+
+
         // 将新请求到的数据添加到之前的数据后
         console.log(this.pageIndex, "this.pageIndex");
         this.listData = this.listData.concat(articleArr);

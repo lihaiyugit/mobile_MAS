@@ -168,7 +168,7 @@ export default {
     if (res.bol) {
       return {
         bannerArr: res.data.bannerImg,
-        typeData: res.data.specialStudyType.slice(0, 3),
+        typeData: res.data.specialStudyType,
         studyList: res.data.specialStudy.slice(0, 1),
         xsjlList: res.data.xsjlList,
       };

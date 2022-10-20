@@ -1,6 +1,6 @@
 .page-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #fff;
 }
 
@@ -25,6 +25,7 @@ h2 {
     }
   }
 }
+
 .page-achievement {
   .tabs-box {
     display: flex;
@@ -71,11 +72,13 @@ h2 {
 
   .tabs-content {
     padding: 20px 15px;
+
     .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+
       .item-l {
         min-width: 111px;
         height: 140px;
@@ -140,6 +143,7 @@ h2 {
   }
 
 }
+
 .loading-more-btn {
   width: 160px;
   height: 40px;
@@ -152,3 +156,25 @@ h2 {
   line-height: 38px;
   margin: 0 auto;
 }
+
+/deep/.van-list__loading {
+  width: 160px;
+  height: 40px;
+  border: 1px solid #e56c39;
+  border-radius: 4px;
+  margin: 0 auto;
+  .van-loading {
+    font-size: 16px;
+    font-weight: 400;
+    color: #e56c39;
+    line-height: 36px;
+  }
+
+  .van-loading__text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #e56c39
+  }
+}
+
+
