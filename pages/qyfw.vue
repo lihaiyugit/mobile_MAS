@@ -66,15 +66,105 @@
           </li>
         </ul>
       </div>
-      <div class="flow-content"></div>
+      <div class="flow-content">
+        <div class="style-one" v-if="current==0">
+          <div class="item">
+            <img src="@/static/images/qyfw/mt1.png" alt="" />
+            <h5>《管理会计研究》杂志</h5>
+            <ul>
+              <li>• “观察”栏目</li>
+              <li>• “企业数字化转型巡展”栏目</li>
+              <li>• 学术文章投稿</li>
+            </ul>
+          </div>
+          <div class="item">
+            <img src="@/static/images/qyfw/mt2.png" alt="" />
+            <h5>MAS公众号</h5>
+            <ul>
+              <li>• 深度解读</li>
+              <li>• 实战案例</li>
+              <li>• 决策内参</li>
+            </ul>
+          </div>
+          <div class="item">
+            <img src="@/static/images/qyfw/mt3.png" alt="" />
+            <h5>MAS视频号</h5>
+            <ul>
+              <li>• 布局</li>
+              <li>• MAS会客厅</li>
+            </ul>
+          </div>
+          <div class="item">
+            <img src="@/static/images/qyfw/mt4.png" alt="" />
+            <h5>MAS网站</h5>
+            <ul>
+              <li>• 网站广告</li>
+              <li>• 栏目冠名</li>
+              <li>• 文章连载</li>
+            </ul>
+          </div>
+          <div class="item">
+            <img src="@/static/images/qyfw/mt5.png" alt="" />
+            <h5>社群运营</h5>
+            <ul>
+              <li>• 粉丝活动</li>
+              <li>• 扩展流量/平台转发</li>
+            </ul>
+          </div>
+        </div>
+        <div class="style-one style-two" v-else-if="current==1">
+          <ul >
+            <li style="background-image: url(../../images/qyfw/hd1.png)"><span>品牌活动</span></li>
+            <li style="background-image: url(../../images/qyfw/hd2.png)"><span>闭门研讨会</span></li>
+            <li style="background-image: url(../../images/qyfw/hd3.png)"><span>行业峰会</span></li>
+            <li style="background-image: url(../../images/qyfw/hd4.png)"><span>MAS思宴</span></li>
+            <li style="background-image: url(../../images/qyfw/hd5.png)"><span>线上直播大讲堂</span></li>
+            <li style="background-image: url(../../images/qyfw/hd6.png)"><span>定制化活动</span></li>
+          </ul>
+        </div>
+         <div class="style-one style-two" v-else-if="current==2">
+          <ul >
+            <li style="background-image: url(../../images/qyfw/px1.png)"><span>独家数字化转型实践课程</span></li>
+            <li style="background-image: url(../../images/qyfw/px2.png)"><span>全球化高端财会人才培养项目</span></li>
+            <li style="background-image: url(../../images/qyfw/px3.png)"><span>企业实战内训</span></li>
+            <li style="background-image: url(../../images/qyfw/px4.png)"><span>沉浸式游学</span></li>
+            <li style="background-image: url(../../images/qyfw/px5.png)"><span>师资培训班</span></li>
+            <li style="background-image: url(../../images/qyfw/px6.png)"><span>论文辅导班</span></li>
+          </ul>
+        </div>
+        <div class="style-one" v-else>
+          <div class="item">
+            <img src="@/static/images/qyfw/mt1.png" alt="" />
+            <h5>研究报告</h5>
+            <ul>
+              <li>• 数字化趋势报告</li>
+              <li>• 行业研究报告</li>
+              <li>• 企业研究报告</li>
+              <li>• 课题研究报告</li>
+              <li>• 企业/机构榜单</li>
+            </ul>
+          </div>
+          <div class="item">
+            <img src="@/static/images/qyfw/zk1.png" alt="" />
+            <h5>MAS公众号</h5>
+            <ul>
+              <li><span>• 大咖对面咨询</span><span>• 人才招聘</span></li>
+              <li><span>• 企业诊断</span><span>• 产业升级</span></li>
+              <li><span>• 项目对接</span></li>
+              <li><span>• 完整解决方案</span></li>
+              <li><span>• 企业战略规划</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="qyfw">
-      <img src="@/static/images/qyfw/qy-img.png" alt="">
+      <img src="@/static/images/qyfw/qy-img.png" alt="" />
     </div>
     <div class="discount">
       <div class="item">
         <div class="tip">
-          <img src="@/static/images/qyfw/hot.png" alt="">
+          <img src="@/static/images/qyfw/hot.png" alt="" />
           <span>内容类</span>
         </div>
         <div class="title">
@@ -87,65 +177,71 @@
           <span class="text">/次</span>
         </div>
         <div class="img-r">
-          <img src="@/static/images/qyfw/discount1.png" alt="">
+          <img src="@/static/images/qyfw/discount1.png" alt="" />
         </div>
       </div>
       <div class="item">
         <div class="tip">
-          <img src="@/static/images/qyfw/hot.png" alt="">
+          <img src="@/static/images/qyfw/hot.png" alt="" />
           <span>内容类</span>
         </div>
         <div class="title">
           <h5>企业专访稿件</h5>
           <span>（服务号/公众号）</span>
         </div>
-        <p>从企业视角出发，以采访、对话形式对产品业务、行业趋势、企业实践案例进行解析</p>
+        <p>
+          从企业视角出发，以采访、对话形式对产品业务、行业趋势、企业实践案例进行解析
+        </p>
         <div class="price-box">
           <span class="price">¥20000</span>
           <span class="text">/次</span>
         </div>
         <div class="img-r">
-          <img src="@/static/images/qyfw/discount2.png" alt="">
+          <img src="@/static/images/qyfw/discount2.png" alt="" />
         </div>
       </div>
       <div class="item">
         <div class="tip">
-          <img src="@/static/images/qyfw/hot.png" alt="">
+          <img src="@/static/images/qyfw/hot.png" alt="" />
           <span>内容类</span>
         </div>
         <div class="title">
           <h5>原创稿件</h5>
           <span>（杂志媒体/服务号、公众号）</span>
         </div>
-        <p>《管理会计研究》杂志：“观察”栏目，企业总会计师、财务总监等高管前沿观点文章；“企业巡展”栏目，企业数字化转型图文形式软文宣传</p>
+        <p>
+          《管理会计研究》杂志：“观察”栏目，企业总会计师、财务总监等高管前沿观点文章；“企业巡展”栏目，企业数字化转型图文形式软文宣传
+        </p>
         <div class="price-box">
           <span class="price">¥20000</span>
           <span class="text">/次</span>
         </div>
         <div class="img-r">
-          <img src="@/static/images/qyfw/discount3.png" alt="">
+          <img src="@/static/images/qyfw/discount3.png" alt="" />
         </div>
       </div>
       <div class="item item2">
         <div class="tip tip2">
-          <img src="@/static/images/qyfw/hot.png" alt="">
+          <img src="@/static/images/qyfw/hot.png" alt="" />
           <span>活动类</span>
         </div>
         <div class="title">
           <h5>MAS主办系列活动门票</h5>
         </div>
-        <p>MAS平台主办的所有系列活动入场券（商务休闲活动除外，如高尔夫、品酒等活动）</p>
+        <p>
+          MAS平台主办的所有系列活动入场券（商务休闲活动除外，如高尔夫、品酒等活动）
+        </p>
         <div class="price-box">
           <span class="price">¥20000</span>
           <span class="text">/次</span>
         </div>
         <div class="img-r">
-          <img src="@/static/images/qyfw/discount4.png" alt="">
+          <img src="@/static/images/qyfw/discount4.png" alt="" />
         </div>
       </div>
       <div class="item item2">
         <div class="tip tip2">
-          <img src="@/static/images/qyfw/hot.png" alt="">
+          <img src="@/static/images/qyfw/hot.png" alt="" />
           <span>活动类</span>
         </div>
         <div class="title">
@@ -157,7 +253,7 @@
           <span class="text">/次</span>
         </div>
         <div class="img-r">
-          <img src="@/static/images/qyfw/discount5.png" alt="">
+          <img src="@/static/images/qyfw/discount5.png" alt="" />
         </div>
       </div>
     </div>
@@ -166,19 +262,19 @@
       <div class="service-mian">
         <div class="item">
           <div class="item-l">
-            <img src="@/static/images/qyfw/tel.png" alt="">
+            <img src="@/static/images/qyfw/tel.png" alt="" />
           </div>
           <div class="item-r">
             <h5>13910957544</h5>
             <p><span>(手机号同微信，添加请备注“公司+姓名”)</span></p>
           </div>
         </div>
-         <div class="item">
+        <div class="item">
           <div class="item-l">
-            <img src="@/static/images/qyfw/mail.png" alt="">
+            <img src="@/static/images/qyfw/mail.png" alt="" />
           </div>
           <div class="item-r">
-            <h5>yangww@chinamas.cn</h5>
+            <h5 class="style">yangww@chinamas.cn</h5>
           </div>
         </div>
       </div>

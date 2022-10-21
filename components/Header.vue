@@ -154,10 +154,12 @@
           <div class="title">热门频道</div>
           <div class="content">
             <dl class="item">
-              <dt>
-                <img src="../static/images/qyfw.png" alt="" />
-              </dt>
-              <dd>企业服务</dd>
+              <nuxt-link to="/qyfw">
+                <dt>
+                  <img src="../static/images/qyfw.png" alt="" />
+                </dt>
+                <dd>企业服务</dd>
+              </nuxt-link>
             </dl>
             <dl class="item">
               <dt>
@@ -521,10 +523,10 @@ export default {
     } else {
       this.tabList = this.$store.state.tabList;
     }
-
   },
   watch: {
-    islogin: { //登录框是否展示
+    islogin: {
+      //登录框是否展示
       handler(value) {
         if (value) {
           this.loginShow = value;
@@ -540,8 +542,7 @@ export default {
       this.defaultValue = searchValue;
     }
   },
-  mounted() {
-  },
+  mounted() {},
 
   methods: {
     ...mapMutations(["setToken", "setUserInfo"]),
@@ -566,7 +567,7 @@ export default {
       this.errTips = ""; //错误提示
       this.newPassword = ""; //新密码
       this.confirmPassWord = ""; //确认密码
-      this.$emit('onClose', false);
+      this.$emit("onClose", false);
     },
     //点击每一个栏目
     oNitem(index, item) {
