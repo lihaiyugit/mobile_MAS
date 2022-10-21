@@ -1,7 +1,7 @@
 <template>
   <div class="wapper">
     <Header/>
-    <Tabbar-1/>
+    <Tabbar/>
     <nuxt />
     <Footer />
   </div>

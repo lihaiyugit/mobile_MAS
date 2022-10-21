@@ -1,39 +1,29 @@
 <template>
   <div class="sub-header">
     <div class="tabs-box">
-      <div class="tabs-pre" @click="preFn()" v-if="currentClickNumber > 0">
-        <svg t="1660017357800" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4555" width="16" height="16"><path d="M776.768 512l-314.304 302.72a46.336 46.336 0 0 0 0 67.328c19.264 18.56 50.56 18.56 69.824 0l349.248-336.384a46.336 46.336 0 0 0 0-67.328L532.288 141.952a50.752 50.752 0 0 0-69.824 0 46.336 46.336 0 0 0 0 67.264L776.768 512z" fill="#666666" p-id="4556"></path></svg>
-      </div>
-      <!-- <ul
-          class="tabs" ref='tabs'
-          :style="{
-            width: tabs.length * 70 + 'px',
-            'margin-left': activeIndex * 70 + 'px',
-          }"
-        > -->
-      <!-- <ul class="tabs"  :style="{transform:`translateX(${activeIndex*70}px)`}"> -->
-
-      <ul
-        class="tabs"
-        :class="isOverflow ? 'overflow' : ''"
+      <!-- <div class="tabs-pre" @click="preFn()" v-if="currentClickNumber > 0">
+       <svg t="1660017357800" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4555" width="16" height="16"><path d="M776.768 512l-314.304 302.72a46.336 46.336 0 0 0 0 67.328c19.264 18.56 50.56 18.56 69.824 0l349.248-336.384a46.336 46.336 0 0 0 0-67.328L532.288 141.952a50.752 50.752 0 0 0-69.824 0 46.336 46.336 0 0 0 0 67.264L776.768 512z" fill="#666666" p-id="4556"></path></svg>
+      </div> -->
+      <!-- <ul class="tabs" ref="tabsRef" id="scroller"> -->
+      <van-tabs
+        v-model="activeIndex"
+        color="#ff8556"
+        line-width="20"
+        class="tabsList"
         ref="tabsRef"
-        id="scroller"
-        :style="`transform:translateX(${scrollResultWidth}px);transition:1s;`"
+        @click="oNitem"
       >
-        <li
-          :class="activeIndex == index ? 'active' : ''"
-          v-for="(item, index) in tabs"
+        <van-tab
+          v-for="(item, index) in tabList"
           :key="index"
-          @click="tabsFn(index, $event)"
-          :id="`tab-${index}`"
-        >
-          {{ item }}
-        </li>
-      </ul>
-
-      <div class="tabs-next" @click="nextFn()" v-if="nextIcon">
+          :title="item.mas_menu_name"
+          :name="item.mas_menu_url"
+        ></van-tab>
+      </van-tabs>
+      <!-- </ul> -->
+      <!-- <div class="tabs-next" @click="nextFn()" v-if="nextIcon">
         <svg t="1660017357800" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4555" width="16" height="16"><path d="M776.768 512l-314.304 302.72a46.336 46.336 0 0 0 0 67.328c19.264 18.56 50.56 18.56 69.824 0l349.248-336.384a46.336 46.336 0 0 0 0-67.328L532.288 141.952a50.752 50.752 0 0 0-69.824 0 46.336 46.336 0 0 0 0 67.264L776.768 512z" fill="#666666" p-id="4556"></path></svg>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -41,272 +31,172 @@
 export default {
   data() {
     return {
-      tabs: [
-        "听课程",
-        "找方法",
-        "学案例",
-        "见大咖",
-        "读杂志",
-        "逛书店",
-        "淘资讯",
-        "看专题",
-      ],
-      activeIndex: 1,
+      activeIndex: this.$store.state.subTabId ? this.$store.state.subTabId : "",
       nextIcon: true,
       currentClickNumber: 0,
-      scrollResultWidth: 0, //transform滚动的距离
-      isOverflow: true,
+      tabList: [], //菜单栏列表
     };
   },
-  // 监听
-  // watch: {
-  //   fInit: {
-  //     handler(newVal, oldVal) {
-  //       if (newVal) {
-  //         this.startTime = '开始日期'; // 开始时间
-  //         this.endTime = '结束日期'; // 结束时间
-  //       }
-  //     },
-  //     deep: true
-  //   }
-  // },
+  async fetch() {
+    let res = await this.$axios.notNeedlogin({
+      className: "NavigationController",
+      classMethod: "getLeftNavigation",
+    });
+    if (res.bol) {
+      this.tabList = res.data;
+    }
+  },
+  //监听路由变化使导航高亮
+  watch: {
+    $route(to, from) {
+      if(to.query.menuId!=from.query.menuId){
+        this.activeIndex=to.name;
+        this.$store.commit("setSubTabId", to.name);
+      }
+    },
+  },
+  created() {
+  },
+  computed: {},
   mounted() {
-  var flag; // 鼠标按下
-    var downX; // 鼠标点击的x下标
-    var scrollLeft; // 当前元素滚动条的偏移量
-    scroller.addEventListener("mousedown", function (event) {
-        console.log(event, 'event')
-        this.isOverflow=true
-        // flag = true;
-        // downX = event.clientX; // 获取到点击的x下标
-        // scrollLeft = this.scrollLeft; // 获取当前元素滚动条的偏移量
-    });
-      scroller.addEventListener("mousemove", function (event) {
-         this.isOverflow=true
-        console.log(event, 'event')
-        if (flag) { // 判断是否是鼠标按下滚动元素区域
-            console.log(flag, 'flag')
-            // 获取移动的x轴
-            var moveX = event.clientX;
-            // 当前移动的x轴下标减去刚点击下去的x轴下标得到鼠标滑动距离
-            var scrollX = moveX - downX;
-            // 鼠标按下的滚动条偏移量减去当前鼠标的滑动距离
-            this.scrollLeft = scrollLeft - scrollX;
-            console.log(scrollX)
-        }
-    });
-    // 鼠标抬起停止拖动
-    scroller.addEventListener("mouseup", function () {
-        flag = false;
-    });
-    // 鼠标离开元素停止拖动
-    scroller.addEventListener("mouseleave", function (event) {
-        console.log(event, 'event')
-        flag = false;
-    });
-    this.$refs.tabsRef.addEventListener("scroll", this.handlePlay);
     // this.$refs.tabsRef.addEventListener("scroll", (event) => {
-    //   this.isOverflow=true;
     //   let totalWidths = document.body.clientWidth; // 屏幕总宽度
     //   let scrollWidht = document.getElementById("scroller").scrollLeft;
-    //   console.log(scrollWidht);
-    //   let allWidth = this.tabs.length * 70;
-    //   console.log(allWidth);
     //   if (scrollWidht > totalWidths / 2) {
     //     this.nextIcon = false;
-    //     // this.preIcon = true;
+    //     this.currentClickNumber = 1;
     //   } else {
-    //     console.log("00");
     //     this.nextIcon = true;
-    //     // this.preIcon = false;
     //   }
-    //   if (scrollWidht > totalWidths / 2) {
-    //     // this.preIcon = true;
-    //   } else {
-    //     // this.preIcon = false;
+    //   if (scrollWidht == 0) {
+    //     this.currentClickNumber = 0;
     //   }
     // });
-    // console.log(totalWidths);
-    //  const divBox = document.querySelector(".active").clientWidth
-    // const divBox = document
-    //   .querySelector(".active")
-    //   .getBoundingClientRect().left;
-    // console.log(divBox);
-    // const width = document
-    //   .getElementById("scroller")
-    //   .getBoundingClientRect().width;
-    // console.log(width);
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.initgoRightArrow();
-      });
-    });
+
+    // this.$nextTick(() => {
+    //   setTimeout(() => {
+    //     this.initgoRightArrow();
+    //   });
+    // });
   },
   methods: {
-    handlePlay() {
-      this.isOverflow = true;
-      console.log(this.isOverflow);
-    },
     //初始化判断是否可以向右滚动
-    initgoRightArrow() {
-      const currentScrollWidth = document.querySelector(".tabs").clientWidth;
-      console.log(currentScrollWidth);
-      const canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
-      //如果最后一个流程图标已经展示出来，则停止滚动
-      if (this.currentClickNumber + canNumber >= this.tabs.length - 1) {
-        this.nextIcon = false;
-        return;
-      }
-    },
+    // initgoRightArrow() {
+    //   const currentScrollWidth = document.querySelector(".tabs").clientWidth;
+    //   const canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
+    //   //如果最后一个流程图标已经展示出来，则停止滚动
+    //   if (this.currentClickNumber + canNumber >= this.tabList.length - 1) {
+    //     this.nextIcon = false;
+    //     return;
+    //   }
+    // },
     //点击tabs
-    tabsFn(index, event) {
-      this.isOverflow = false;
-      this.activeIndex = index;
+    oNitem(url) {
       document.body.scrollTop = 0;
-      if (index == this.tabs.length - 2) {
-        this.nextIcon = false;
-      }
+      this.$store.commit("setSubTabId", url);
+      let menuItem = this.tabList.find((c) => c.mas_menu_url == url);
+      this.$router.push({
+        name: url,
+        query: {
+          menuId: menuItem.mas_menu_id,
+        },
+      });
+      // if (index > 4) {
+      //   this.nextIcon = false;
+      //   this.currentClickNumber = 1;
+      // }
+
+      // let divBoxWidth = document.querySelector(".van-tab--active").clientWidth;
+      // let spanLeft =
+      //   document.querySelector(".van-tab--active").getBoundingClientRect()
+      //     .left - divBoxWidth;
       // 滑动控件
-      let spanLeft = event.clientX; // 当前点击的元素左边距离
-      let divBox = document.getElementById(`tab-${index}`).clientWidth / 2; // 点击的元素一半宽度
-      let totalWidths = document.body.clientWidth; // 屏幕总宽度
-      let widths = totalWidths / 2; // 一半的屏幕宽度
-      let spanRight = totalWidths - spanLeft; // 元素的右边距离
-      let scrollBox = document.querySelector(".tabs"); // 获取最外层的元素
-      let scrollL = scrollBox.scrollLeft; // 滚动条滚动的距离
-      if (spanLeft < 100) {
-        // scrollBox.scrollLeft = scrollL + (spanLeft - widths) + divBox;
-        this.scrollResultWidth += 70;
-        this.nextIcon = true;
-        this.currentClickNumber = 0;
-      }
+      // let spanLeft = event.clientX; // 当前点击的元素左边距离
+      // let totalWidths = document.body.clientWidth; // 屏幕总宽度
+      // let spanRight = totalWidths - spanLeft; // 元素的右边距离
+      // let scrollBox = document.querySelector(".tabs"); // 获取最外层的元素
+      // let scrollL = scrollBox.scrollLeft; // 滚动条滚动的距离
+      // if (spanLeft < 100) {
+      //   // scrollBox.scrollLeft = scrollL + (spanLeft - totalWidths) + divBoxWidth;
+      //   // scrollBox.scrollLeft += divBoxWidth;
+      //   scrollBox.scrollLeft += divBoxWidth / 2;
+      //   // this.nextIcon = true;
+      //   // this.currentClickNumber = 1;
+      // }
 
-      if (spanRight < 100 && index !== this.tabs.length - 1) {
-        this.scrollResultWidth += -70;
-        this.currentClickNumber += 1;
-      }
-
-      if (index == 0) {
-        this.$router.push({
-          name: "index",
-        });
-      } else if (index == 1) {
-        this.$router.push({
-          name: "zff",
-          // query: { id: index },
-        });
-      } else if (index == 2) {
-        // this.$router.push("/home/way");
-        this.$router.push({
-          name: "xal",
-          // query: { id: index },
-        });
-      } else if (index == 3) {
-        this.$router.push({
-          name: "jdk",
-          // query: { id: index },
-        });
-      } else if (index == 4) {
-        this.$router.push({
-          name: "zz",
-          // query: { id: index },
-        });
-      } else if (index == 5) {
-        this.$router.push({
-          name: "gsd",
-          // query: { id: index },
-        });
-      } else if (index == 6) {
-        this.$router.push({
-          name: "tzx",
-          // query: { id: index },
-        });
-      }
-      //  if (this.activeIndex > -(this.tabs.length + this.activeIndex)) {
-      //   this.activeIndex -= 1;
-      // }else{
-      //   this.activeIndex += 1;
+      // if (spanRight > 0 || scrollL > 150) {
+      //   scrollBox.scrollLeft += -divBoxWidth;
+      //   this.currentClickNumber += 1;
       // }
     },
     //点击向前
     preFn() {
-      this.isOverflow = false;
-      console.log(this.activeIndex, "向前");
-      // if (this.activeIndex < 0) {
-      //   this.activeIndex += 1;
-      //   this.$refs.tabs["style"].marginLeft = this.activeIndex * 70 + "px";
-      // }
-      // if (this.activeIndex > 0) {
-      //   this.activeIndex--;
-      //   this.$refs.tabs["style"].marginLeft = -this.activeIndex * 70 + "px";
-      // }
       //如果右点击的次数大于0，才可以左滚
+      // let scrollBox = document.querySelector(".tabsList");
+      // scrollBox.scrollLeft = 0;
+      // console.log(scrollBox.scrollLeft,'--')
       if (this.currentClickNumber > 0) {
         this.currentClickNumber -= 1;
         this.nextIcon = true;
-        this.scrollResultWidth += 70;
+        let scrollBox = document.querySelector(".tabsList");
+        console.log(scrollBox, scrollBox.scrollLeft, "--");
+        scrollBox.scrollLeft = 0;
       } else {
+        console.log("---=");
         return false;
       }
     },
     //点击下一个
     nextFn() {
-      this.isOverflow = false;
-      console.log(this.activeIndex, "向后");
-      let currentScrollWidth = document.querySelector(".tabs").clientWidth;
-      let canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
-      //如果最后一个流程图标已经展示出来，则停止滚动
-      if (this.currentClickNumber + canNumber >= this.tabs.length) {
-        return;
-      }
-      //说明放不下有滚动条
-      if (this.tabs.length > canNumber) {
-        this.currentClickNumber += 1;
-        if (this.currentClickNumber + canNumber >= this.tabs.length - 1) {
-          this.nextIcon = false;
-        }
-        this.scrollResultWidth += -70;
-        // this.fnScrollWidth("add");
-      }
-      // if (this.activeIndex > -(this.tabs.length + this.activeIndex)) {
-      //   this.activeIndex -= 1;
-      //   console.log(this.activeIndex);
-      //   setTimeout(() => {
-      //     this.$refs.tabs["style"].marginLeft = this.activeIndex * 70 + "px";
-      //   }, 100);
-      // }
-      // if (this.activeIndex < this.tabs.length - 5) {
-      //   this.activeIndex++;
-      //   this.$refs.tabs["style"].marginLeft = -this.activeIndex * 70 + "px";
-      // }
+      let scrollBox = document.querySelector(".tabsList");
+      console.log(scrollBox, scrollBox.scrollLeft, "-44-");
+      scrollBox.scrollLeft = 1000;
 
-      //       function() {
-      //   a.els.menuListEl.style.transitionProperty = "";
-      //   a.els.menuListEl.style.transitionDuration = "";
-      //   a.els.menuListEl.style.transitionTimingFunction = "";
-      //   a.els.menuListEl.classList.add("interaction");
-      //   a.els.menuPrevBtnEl.style.display = "block";
-      //   if (a.isRtl()) {
-      //     var c = a.getRelativeCoordinate(a.els.lastMenuEl, "right") - a.currentMenuPositionX;
-      //     var b = "desktop" === a.currentDevice ? a.desktopViewMovingDistance : a.mobileViewMovingDistance;
-      //     c - b > a.els.menuListEl.getBoundingClientRect().width ?
-      //       a.currentMenuPositionX += b : (a.currentMenuPositionX += c - a.els.menuListEl.getBoundingClientRect().width, a.els.menuNextBtnEl.style.display = "none")
-      //   } else c = a.getRelativeCoordinate(a.els.lastMenuEl, "right") + a.currentMenuPositionX, b = "desktop" === a.currentDevice ? a.desktopViewMovingDistance : a.mobileViewMovingDistance, c - b > a.els.menuListEl.getBoundingClientRect().width ? a.currentMenuPositionX -= b : (a.currentMenuPositionX -= c - a.els.menuListEl.getBoundingClientRect().width, a.els.menuNextBtnEl.style.display = "none");
-      //   a.els.menuListEl.style.transform =
-      //     "translateX(" + a.currentMenuPositionX + "px)";
-      //   a.setAccessibility()
+      // let currentScrollWidth = document.querySelector(".tabs").clientWidth;
+      // let canNumber = Math.floor(currentScrollWidth / 70); //可以放下的个数
+      // //如果最后一个流程图标已经展示出来，则停止滚动
+      // if (this.currentClickNumber + canNumber >= this.tabs.length) {
+      //   return;
+      // }
+      // //说明放不下有滚动条
+      // if (this.tabs.length > canNumber) {
+      //   this.currentClickNumber += 1;
+      //   if (this.currentClickNumber + canNumber >= this.tabs.length - 1) {
+      //     this.nextIcon = false;
+      //   }
+      //   let totalWidths = document.body.clientWidth; // 屏幕总宽度
+      //   let scrollBox = document.querySelector(".tabs");
+      //   scrollBox.scrollLeft = totalWidths + 70;
       // }
     },
   },
 };
 </script>
 <style lang="less" scoped>
+/deep/.van-tabs {
+  margin-left: -10px;
+}
+/deep/.van-tab {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 16px;
+}
+/deep/.van-tab--active {
+  font-weight: bold;
+  color: #212223;
+}
+/deep/.van-tabs__nav--line.van-tabs__nav--complete {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 .sub-header {
   width: 100%;
   background-color: #fff;
   .tabs-box {
     padding: 0px 15px;
-    height: 40px;
+    // height: 40px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -348,13 +238,11 @@ export default {
     ::-webkit-scrollbar {
       display: none;
     }
-    .overflow {
-      // overflow-x: scroll;
-    }
     .tabs {
-      // overflow-x: scroll;
-      // display: -webkit-box;
-      display: flex;
+      overflow-x: scroll;
+      display: -webkit-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
       align-items: center;
       position: relative;
       max-width: 100%;
