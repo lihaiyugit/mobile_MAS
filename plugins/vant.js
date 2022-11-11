@@ -3,7 +3,7 @@ import Vue from "vue";
 // import 'vant/lib/index.css';
 import {
   Button, Icon, Search, Tab, Tabs, Popup, Swipe, SwipeItem, List, Loading,
-  Checkbox, CheckboxGroup, Toast,Dialog
+  Checkbox, CheckboxGroup, Toast,Dialog,RadioGroup, Radio
 } from "vant";
 Vue.use(Toast);
 Vue.use(Button);
@@ -19,4 +19,6 @@ Vue.use(Loading);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Dialog);
+Vue.use(Radio);
+Vue.use(RadioGroup);
 

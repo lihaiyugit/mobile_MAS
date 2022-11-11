@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <Header :islogin="islogin" @onClose='onClose'/>
+    <Header :islogin="islogin" @onClose="onClose" />
     <div class="page-header">
       <div class="banner">
         <img :src="bannerArr[0].mas_banner_img" alt="" />
@@ -56,8 +56,12 @@
             <h5>{{ itStudy.mas_special_study_title }}</h5>
             <p class="twoline">{{ itStudy.mas_special_study_describe }}</p>
             <div class="btn-box">
-              <button @click="tryRead(itStudy.mas_special_study_id)">试读</button>
-              <button @click="download(itStudy.mas_special_study_id)">下载</button>
+              <button @click="tryRead(itStudy.mas_special_study_id)">
+                试读
+              </button>
+              <button @click="download(itStudy.mas_special_study_id)">
+                下载
+              </button>
             </div>
           </div>
         </div>
@@ -65,8 +69,12 @@
       <div class="kthz">
         <h2>课题合作</h2>
         <div class="kthz-main">
-          <img src="@/static/images/ktyj/jghz.png" alt="" />
-          <img src="@/static/images/ktyj/grhz.png" alt="" />
+          <img
+            src="@/static/images/ktyj/jghz.png"
+            @click="jgShowPopup"
+            alt=""
+          />
+          <img src="@/static/images/ktyj/grhz.png" @click="personShowPopup" alt="" />
         </div>
       </div>
     </div>
@@ -140,6 +148,10 @@
         </div> -->
       </div>
     </div>
+    <!-- 课题合作（机构） -->
+    <jgPopup v-if="jgShow" @onClose="onClose"/>
+    <!-- 课题合作（个人）-->
+    <personalPopup v-if="personShow" @onPersonClose="onPersonClose"/>
   </div>
 </template>
 <script>
@@ -153,7 +165,9 @@ export default {
       bannerArr: [], //banner图
       studyList: [], //课题研究列表
       xsjlList: [], //学术研究活动列表
-      islogin:false,//是否需要登录
+      islogin: false, //是否需要登录
+      jgShow: false, //机构弹框
+      personShow:false,//个人弹框
     };
   },
   //请求数据
@@ -174,9 +188,7 @@ export default {
       };
     }
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     //点击课题成果列表
     cutValue(index, id) {
@@ -213,15 +225,32 @@ export default {
         this.$store.state.token == null ||
         this.$store.state.token == undefined
       ) {
-        Toast({ duration: 3000, message: '登陆后可下载,请点击页面登录按钮！' });
-         this.islogin = true;
+        Toast({ duration: 3000, message: "登陆后可下载,请点击页面登录按钮！" });
+        this.islogin = true;
       } else {
         location.href = portUrl + "?mas_special_study_id=" + pdfId;
       }
     },
     //关闭登录框
-    onClose(value){
-      this.islogin=value;
+    onClose(value) {
+      this.islogin = value;
+    },
+    //机构弹框展示
+    jgShowPopup() {
+      this.jgShow = true;
+    },
+    //关闭机构弹框
+    onClose(val){
+      console.log(val)
+      this.jgShow=val;
+    },
+    // 个人弹框展示
+    personShowPopup(){
+      this.personShow = true;
+    },
+    // 关闭个人弹框
+    onPersonClose(val){
+      this.personShow = val;
     }
   },
 };

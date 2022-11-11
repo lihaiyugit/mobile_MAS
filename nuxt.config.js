@@ -211,7 +211,7 @@ export default {
     host: '127.0.0.1'
   },
   router: {
-    middleware:'midd',//全局生效 不能删
+    // middleware:'midd',//全局生效 不能删
     linkActiveClass: 'nuxt-link-active',
     // linkExactActiveClass: 'nuxt-link-exact-active',
     // mode: 'hash',
