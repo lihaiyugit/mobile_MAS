@@ -347,6 +347,9 @@ export default {
 .person_form .item:last-child {
   border-bottom: none;
 }
+.select-group .item{
+  border-bottom: none;
+}
 
 .person_form .item span {
   width: 26%;
