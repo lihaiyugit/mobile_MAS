@@ -18,7 +18,7 @@
             <van-radio-group
               v-model="JGform.type"
               direction="horizontal"
-              icon-size="16px"
+              icon-size="14px"
             >
               <van-radio
                 v-for="(it, idx) in cooperationForm"
@@ -270,16 +270,14 @@ export default {
   position: relative;
   z-index: 997;
   width: 100%;
-  height: 110px;
-  padding: 4px 0px;
+  height: 116px;
   background: #ffffff;
-  border-radius: 2px;
-  box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
-    0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+  border: 0.5px solid #e7e7e7;
   scrollbar-width: none; /// firefox /
   -ms-overflow-style: none; /// IE 10+ */
   overflow-x: hidden;
   overflow-y: auto;
+  margin-top: 4px;
   li {
     width: auto;
     height: 26px;
@@ -304,7 +302,7 @@ export default {
   display: flex;
   align-items: center;
   height: 50px;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 0.5px solid #e7e7e7;
   font-size: 14px;
   font-weight: 400;
   text-align: left;
