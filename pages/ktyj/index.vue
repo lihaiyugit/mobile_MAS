@@ -69,12 +69,18 @@
       <div class="kthz">
         <h2>课题合作</h2>
         <div class="kthz-main">
-          <img
-            src="@/static/images/ktyj/jghz.png"
-            @click="jgShowPopup"
-            alt=""
-          />
-          <img src="@/static/images/ktyj/grhz.png" @click="personShowPopup" alt="" />
+          <div class="img_box" @click="jgShowPopup">
+            <img
+              src="@/static/images/ktyj/jghz.png"
+              alt=""
+            />
+          </div>
+          <div class="img_box"  @click="personShowPopup">
+            <img
+              src="@/static/images/ktyj/grhz.png"
+              alt=""
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -149,9 +155,9 @@
       </div>
     </div>
     <!-- 课题合作（机构） -->
-    <jgPopup v-if="jgShow" @onClose="onClose"/>
+    <jgPopup v-if="jgShow" @onClose="onClose" />
     <!-- 课题合作（个人）-->
-    <personalPopup v-if="personShow" @onPersonClose="onPersonClose"/>
+    <personalPopup v-if="personShow" @onPersonClose="onPersonClose" />
   </div>
 </template>
 <script>
@@ -167,7 +173,7 @@ export default {
       xsjlList: [], //学术研究活动列表
       islogin: false, //是否需要登录
       jgShow: false, //机构弹框
-      personShow:false,//个人弹框
+      personShow: false, //个人弹框
     };
   },
   //请求数据
@@ -240,18 +246,18 @@ export default {
       this.jgShow = true;
     },
     //关闭机构弹框
-    onClose(val){
-      console.log(val)
-      this.jgShow=val;
+    onClose(val) {
+      console.log(val);
+      this.jgShow = val;
     },
     // 个人弹框展示
-    personShowPopup(){
+    personShowPopup() {
       this.personShow = true;
     },
     // 关闭个人弹框
-    onPersonClose(val){
+    onPersonClose(val) {
       this.personShow = val;
-    }
+    },
   },
 };
 </script>

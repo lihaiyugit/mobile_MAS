@@ -181,9 +181,16 @@ h2 {
     display: flex;
     justify-content: space-between;
 
-    img {
+    .img_box {
       width: 164px;
       height: 84px;
+
+      img {
+        pointer-events: none;
+        -webkit-user-select: none;
+        /*禁用手机浏览器的用户选择功能 */
+        -moz-user-select: none;
+      }
     }
   }
 }
@@ -305,5 +312,3 @@ h2 {
     }
   }
 }
-
-
