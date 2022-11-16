@@ -176,10 +176,12 @@
               </nuxt-link>
             </dl>
             <dl class="item">
-              <dt>
-                <img src="../static/images/hyfw.png" alt="" />
-              </dt>
-              <dd>会员服务</dd>
+              <nuxt-link to="/hyfw">
+                <dt>
+                  <img src="../static/images/hyfw.png" alt="" />
+                </dt>
+                <dd>会员服务</dd>
+              </nuxt-link>
             </dl>
             <dl class="item">
               <dt>
