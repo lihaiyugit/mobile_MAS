@@ -350,7 +350,7 @@
         <ul class="pay-info">
           <li>
             <div class="headline">商品价</div>
-            <div class="price"><span>¥</span>360.00</div>
+            <div class="price"><span>¥</span>{{ memberprice }}.00</div>
           </li>
           <li>
             <div class="headline">余额抵扣</div>
@@ -358,7 +358,7 @@
           </li>
           <li>
             <div class="headline">合计</div>
-            <div class="price"><span>¥</span>360.00</div>
+            <div class="price"><span>¥</span>{{ memberprice }}.00</div>
           </li>
         </ul>
       </div>
