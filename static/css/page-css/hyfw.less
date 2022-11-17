@@ -5,7 +5,7 @@
   .page-header {
     width: 100%;
     height: 170px;
-    background-image: url(../../images/hyfw/banner.png);
+    // background-image: url(../../images/hyfw/banner.png);
     background-size: cover;
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -90,21 +90,38 @@
       li {
         width: 50%;
         text-align: center;
+        line-height: 43px;
 
         span {
-          display: inline-block;
           opacity: 0.6;
           font-size: 16px;
           font-family: PingFang SC, PingFang SC-5;
           font-weight: 400;
           color: #6f3a09;
-          line-height: 43px;
+
         }
       }
 
       .active {
         background: #ffffff;
         border-radius: 8px 8px 0px 0px;
+
+        span {
+          font-weight: 600;
+          padding: 0px 2px;
+          background: linear-gradient(to bottom, #fff 70%, #fbe9cf 30%, #fbe9cf);
+        }
+      }
+
+      .articleActive {
+        background: #ffffff;
+        border-radius: 8px 8px 0px 0px;
+
+        span {
+          font-weight: 600;
+          padding: 0px 2px;
+          background: linear-gradient(to bottom, #fff 70%, #ffe9e0 30%);
+        }
       }
     }
   }
@@ -126,19 +143,51 @@
       }
 
       .vip-type {
-        ul {
-          display: flex;
-          justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
 
-          li {
-            width: 105px;
-            height: 130px;
-            background: #ffffff;
-            border: 0.5px solid #e7e7e7;
-            border-radius: 6px;
-            text-align: center;
-            color: #6f3a09;
-            position: relative;
+        dl {
+          width: 105px;
+          height: 130px;
+          background: #ffffff;
+          border: 0.5px solid #e7e7e7;
+          border-radius: 6px;
+          text-align: center;
+          color: #6f3a09;
+          position: relative;
+
+          .tj {
+            position: absolute;
+            top: -4px;
+            left: -1px;
+            width: 54px;
+            height: 18px;
+            background-image: url(../../images/hyfw/tip_bg.png);
+            background-size: cover;
+
+            span {
+              font-size: 12px;
+              font-weight: 500;
+              text-align: center;
+              color: #6f3a09;
+              line-height: 17px;
+              transform: scale(0.83);
+              display: inline-block;
+            }
+
+          }
+
+          dt {
+            height: 107px;
+
+            .mark {
+              width: 33px;
+              height: 33px;
+              position: absolute;
+              top: 2px;
+              right: 2px;
+              display: none;
+            }
 
             .month {
               font-size: 13px;
@@ -171,28 +220,86 @@
               }
             }
 
-            .base-tip {
-              width: 100%;
-              height: 23px;
-              background: #fff4df;
-              border-radius: 0px 0px 6px 6px;
-              position: absolute;
-              left: 0px;
-              bottom: 0px;
+          }
 
-              span {
-                font-size: 12px;
-                font-weight: 400;
-                text-align: center;
-                color: #9a7141;
-                line-height: 21px;
-                transform: scale(0.83);
-              }
+          dd {
+            width: 100%;
+            height: 23px;
+            background: #fff4df;
+            border-radius: 0px 0px 6px 6px;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+
+            span {
+              font-size: 12px;
+              font-weight: 400;
+              text-align: center;
+              color: #9a7141;
+              line-height: 21px;
+              transform: scale(0.83);
+            }
+          }
+        }
+
+        .plus-checked {
+          background-color: #FFF2DF;
+          border: 1px solid #f2bb6b;
+
+          dt {
+            width: 107px;
+            height: 107px;
+            background-image: url(../../images/hyfw/select_bg.png);
+            background-size: cover;
+
+            .mark {
+              display: block;
+            }
+          }
+
+          dd {
+            background: #ffdb99;
+
+            span {
+              color: #6f3a09;
             }
           }
         }
       }
+      .article-type{
+        dl{
+          .tj {
+            background-image: url(../../images/hyfw/article_item.png);
+          }
+          dd{
+            background: #fff0eb;
+            span{
+              color: #9a5741;
+            }
+          }
+        }
+        .article-checked{
+          background-color:#FFF4EF;
+          border: 1px solid #FDB99C;
+          dt {
+            width: 107px;
+            height: 107px;
+            background-image: url(../../images/hyfw/select_bg.png);
+            background-size: cover;
 
+            .mark {
+              display: block;
+            }
+          }
+
+          dd {
+            background: #ffccb7;
+            span {
+              color: #6f3a09;
+            }
+          }
+        }
+      }
     }
 
     .pay-type {
@@ -456,7 +563,7 @@
     }
 
     .value-added {
-      padding: 0px 15px 40px 15px;
+      padding: 0px 15px 140px 15px;
 
       h2 {
         font-size: 16px;
@@ -665,28 +772,49 @@
     .header-box {
       width: 100%;
       height: 73px;
-      background-image: url(../../images/hyfw/tq_bg.png);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       background: linear-gradient(277deg, rgba(242, 187, 107, 0.40) 7%, #fff1d6 75%);
+      border: 1px solid;
+      border-image: linear-gradient(180deg, #fffaef, #fae3bd) 1 1;
+      border-radius: 8px 8px 0px 0px;
 
-      // border-image: linear-gradient(180deg, #fffaef, #fae3bd) 1 1;
-      // border-radius: 8px 8px 0px 0px;
-      .text {
-        font-size: 18px;
-        font-weight: 500;
-        text-align: left;
-        color: #6f3a09;
-        line-height: 25px;
-        letter-spacing: 0.75px;
-        background-image: url(../../images/hyfw/tq_vip.png);
-        background-size: 50px 35px;
-        background-position: 15px bottom;
-        background-repeat: no-repeat;
-        padding-top: 24px;
-        padding-left: 20px;
+      .header-mian {
+        width: 100%;
+        height: 73px;
+        background-image: url(../../images/hyfw/tq_bg.png);
+        background-size: cover;
+
+        .text {
+          font-size: 18px;
+          font-weight: 500;
+          text-align: left;
+          color: #6f3a09;
+          line-height: 25px;
+          letter-spacing: 0.75px;
+          // background-image: url(../../images/hyfw/tq_vip.png);
+          background-size: 50px 35px;
+          background-position: 15px bottom;
+          background-repeat: no-repeat;
+          padding-top: 24px;
+          padding-left: 20px;
+          display: flex;
+          flex-direction: column;
+
+          .text-tip {
+            position: relative;
+          }
+
+          .line {
+            width: 120px;
+            height: 9px;
+            background: #fddaa0;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: -10px;
+          }
+        }
       }
+
+
     }
 
     .member {
@@ -778,22 +906,25 @@
         line-height: 20px;
         margin: 0 auto;
       }
-      .btn-box{
+
+      .btn-box {
         display: flex;
         margin-top: 28px;
         height: 50px;
         border-top: 1px solid #f3f3f3;
-        .btn{
-          width:50%;
+
+        .btn {
+          width: 50%;
           font-size: 14px;
-font-weight: 500;
-text-align: center;
-color: #212223;
-line-height: 20px;
-line-height:50px;
-&:nth-child(1){
-  border-right: 1px solid #f3f3f3;
-}
+          font-weight: 500;
+          text-align: center;
+          color: #212223;
+          line-height: 20px;
+          line-height: 50px;
+
+          &:nth-child(1) {
+            border-right: 1px solid #f3f3f3;
+          }
         }
       }
     }
