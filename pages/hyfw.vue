@@ -388,7 +388,12 @@
               <span class="text-tip"
                 >{{ memberType == 2 ? "PLUS会员特权" : "文章会员特权" }}
               </span>
-              <span class="line"></span>
+              <span
+                class="line"
+                :style="{
+                  width: memberType == 2 ? '34%' : '32%',
+                }"
+              ></span>
             </div>
           </div>
         </div>
