@@ -161,12 +161,12 @@
                 <dd>企业服务</dd>
               </nuxt-link>
             </dl>
-            <dl class="item">
+            <!-- <dl class="item">
               <dt>
                 <img src="../static/images/dy.png" alt="" />
               </dt>
               <dd>订阅</dd>
-            </dl>
+            </dl> -->
             <dl class="item">
               <nuxt-link to="/ktyj">
                 <dt>
@@ -184,10 +184,12 @@
               </nuxt-link>
             </dl>
             <dl class="item">
-              <dt>
-                <img src="../static/images/tzfw.png" alt="" />
-              </dt>
-              <dd>作者服务</dd>
+              <nuxt-link to="/zzfw">
+                <dt>
+                  <img src="../static/images/tzfw.png" alt="" />
+                </dt>
+                <dd>作者服务</dd>
+              </nuxt-link>
             </dl>
             <dl class="item">
               <dt>
