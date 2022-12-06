@@ -192,10 +192,12 @@
               </nuxt-link>
             </dl>
             <dl class="item">
+              <nuxt-link to="/hd">
               <dt>
                 <img src="../static/images/hd.png" alt="" />
               </dt>
               <dd>活动</dd>
+              </nuxt-link>
             </dl>
           </div>
         </div>
