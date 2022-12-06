@@ -125,7 +125,7 @@
               <p><span>元年研究院干货</span> <span>2022-11-16</span></p>
             </dt>
             <dd>
-              <img src="" alt="">
+              <img src="" alt="" />
             </dd>
           </dl>
           <dl>
@@ -134,7 +134,7 @@
               <p><span>元年研究院干货</span> <span>2022-11-16</span></p>
             </dt>
             <dd>
-              <img src="" alt="">
+              <img src="" alt="" />
             </dd>
           </dl>
           <dl>
@@ -143,10 +143,37 @@
               <p><span>元年研究院干货</span> <span>2022-11-16</span></p>
             </dt>
             <dd>
-              <img src="" alt="">
+              <img src="" alt="" />
             </dd>
           </dl>
         </div>
+      </div>
+    </div>
+    <!-- 免费票 -->
+    <div class="bottom-content" style="display: none">
+      <div class="center-main">
+        <span class="ticket">免费票</span>
+        <div class="apply">立即报名</div>
+      </div>
+    </div>
+    <!-- 已报名 -->
+    <div class="bottom-content">
+      <div class="center-main">
+        <div class="price">
+          <span>¥</span>
+          <span>50.00</span>
+        </div>
+        <div class="registered">已报名</div>
+      </div>
+    </div>
+    <!-- 已结束 -->
+    <div class="bottom-content">
+      <div class="center-main">
+        <div class="price">
+          <span>¥</span>
+          <span>50.00</span>
+        </div>
+        <div class="ended">已结束</div>
       </div>
     </div>
   </div>
