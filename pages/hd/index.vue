@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="title-r">
-          <img src="" alt="" />
+          <img src="@/static/images/hd/share.png" alt="" />
           <span>分享</span>
         </div>
       </div>
@@ -77,7 +77,29 @@
           <span></span>
           <h3>活动地点</h3>
         </div>
-        <div class="location-main"></div>
+        <div class="location-main">
+          <client-only>
+          <!-- <baidu-map
+            :center="center"
+            :zoom="zoom"
+            @ready="handler"
+            :scroll-wheel-zoom="true"
+          >
+            <bm-marker
+              :position="center"
+              :dragging="true"
+              animation="BMAP_ANIMATION_BOUNCE"
+            >
+              <bm-label
+                :content="北京"
+                :labelStyle="{ color: 'red', fontSize: '10px' }"
+                :offset="{ width: -35, height: 30 }"
+              />
+            </bm-marker>
+          </baidu-map> -->
+           <baidu-map class="map" center="北京"></baidu-map>
+          </client-only>
+        </div>
       </div>
       <div class="other">
         <div class="title">
@@ -150,7 +172,7 @@
       </div>
     </div>
     <!-- 免费票 -->
-    <div class="bottom-content" style="display: none">
+    <div class="bottom-content"  style="display: none">
       <div class="center-main">
         <span class="ticket">免费票</span>
         <div class="apply">立即报名</div>
@@ -167,7 +189,7 @@
       </div>
     </div>
     <!-- 已结束 -->
-    <div class="bottom-content">
+    <div class="bottom-content"  style="display: none">
       <div class="center-main">
         <div class="price">
           <span>¥</span>
@@ -186,11 +208,12 @@ export default {
     return {
       isplay: true, //是否播放视频
       swiperOption: {
-        loop: false, // 无限循环
-        autoplay: false, //可选选项，自动滑动
-        speed: 1000,
-        // slidesPerView: 1, // 设置slider容器能够同时显示的slides数量(轮播模式)
-        spaceBetween: 15, // 在slide之间设置距离
+        // loop: false, // 无限循环
+        // autoplay: false, //可选选项，自动滑动
+        // speed: 1000,
+        centeredSlides: false,
+        slidesPerView: 1.13,// 设置slider容器能够同时显示的slides数量(轮播模式)
+        // spaceBetween: 15, // 在slide之间设置距离
         // slidesPerGroup: 1, // 在轮播模式下定义slides的数量多少为一组。
         // 如果需要分页器
         pagination: {
@@ -198,6 +221,8 @@ export default {
           clickable: true, // 允许点击小圆点跳转
         },
       },
+      center: { lng: 0, lat: 0 },
+      zoom: 12,
     };
   },
   components: {
@@ -209,6 +234,34 @@ export default {
     this.$refs.movie.addEventListener("pause", this.handlePause);
   },
   methods: {
+    //地图
+    handler({ BMap, map }) {
+      let _this = this;
+      // 创建地址解析器实例
+      var myGeo = new BMap.Geocoder();
+      // map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
+      // let address = this.activityDetails.mas_activity_address;
+       let address = "北京";
+      // 将地址解析结果显示在地图上,并调整地图视野 /* 获取位置对应的坐标 */
+      // this.activityDetails.mas_activity_address
+      myGeo.getPoint(
+        address,
+        function (point) {
+          if (point) {
+            _this.center.lng = point.lng;
+            _this.center.lat = point.lat;
+            _this.zoom = 17;
+          } else {
+            alert("您选择地址没有解析到结果!");
+          }
+        },
+        map
+      );
+      /* 利用坐标获取地址的详细信息 */
+      // myGeo.getLocation(_this.center, (res) => {
+      //   console.log(res);
+      // });
+    },
     //点击视频播放按钮
     handlePlay() {
       this.$refs.movie.play();

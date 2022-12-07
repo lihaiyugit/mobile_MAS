@@ -57,9 +57,8 @@ export default {
     { src: '@/plugins/lazyload', ssr: true },
     { src: '@/plugins/pdf.js', ssr: false },
     { src: '@/plugins/vant.js', ssr: true },
-    { src: '@/plugins/touch.js', ssr: false }
-
-    // { src: '@/plugins/map.js', ssr: false },
+    { src: '@/plugins/touch.js', ssr: false },
+    { src: '@/plugins/map.js', ssr: false },
 
   ],
 
