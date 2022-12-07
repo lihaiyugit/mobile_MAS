@@ -193,10 +193,10 @@
             </dl>
             <dl class="item">
               <nuxt-link to="/hd">
-              <dt>
-                <img src="../static/images/hd.png" alt="" />
-              </dt>
-              <dd>活动</dd>
+                <dt>
+                  <img src="../static/images/hd.png" alt="" />
+                </dt>
+                <dd>活动</dd>
               </nuxt-link>
             </dl>
           </div>
@@ -422,7 +422,7 @@
             <div class="form-item">
               <input
                 type="password"
-                placeholder="密码确认"
+                placeholder="请输入确认密码"
                 v-model="confirmPassword"
                 @blur="confirmPasswordBlur()"
               />
@@ -572,7 +572,7 @@ export default {
       this.checked = false; //隐私协议
       this.errTips = ""; //错误提示
       this.newPassword = ""; //新密码
-      this.confirmPassWord = ""; //确认密码
+      this.confirmPassword = ""; //确认密码
       this.$emit("onClose", false);
     },
     //点击每一个栏目
@@ -617,7 +617,7 @@ export default {
     },
     //密码验证
     passwordBlur() {
-      if (this.confirmPassWord == "") {
+      if (this.password == "") {
         this.errTips = "密码不能为空";
         return false;
       }
@@ -635,7 +635,7 @@ export default {
       }
     },
     newPasswordBlur() {
-      if (this.newPassword == "" || this.confirmPassWord == "") {
+      if (this.newPassword == "") {
         this.errTips = "新密码不能为空";
         return false;
       }
@@ -653,7 +653,7 @@ export default {
       }
     },
     confirmPasswordBlur() {
-      if (this.confirmPassWord == "") {
+      if (this.confirmPassword == "") {
         this.errTips = "确认密码不能为空";
         return false;
       }
@@ -672,6 +672,12 @@ export default {
     },
     //点击登录方式切换
     changeLogin(type) {
+      this.tel = ""; //手机号
+      this.code = ""; //验证码
+      this.password = ""; //密码
+      this.checked = false; //隐私协议
+      this.newPassword = ""; //新密码
+      this.confirmPassword = ""; //确认密码
       this.loginType = type;
       this.errTips = "";
     },
@@ -781,7 +787,6 @@ export default {
     //账号密码登录
     loginPwd() {
       let _this = this;
-      console.log("密码登录");
       if (_this.telBlur() && _this.passwordBlur()) {
         let params = {
           type: 1,
