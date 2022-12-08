@@ -36,7 +36,8 @@
           <span>({{commentList.length}})</span>
         </div>
       </div>
-      <ul class="comment-list" v-if="commentList.length > 0">
+      <!-- <ul class="comment-list" v-if="commentList.length > 0"> -->
+        <ul class="comment-list" >
         <li>
           <div class="li-l">
             <img src="@/static/images/user-photo.png" alt="" />
@@ -70,12 +71,14 @@
           </div>
         </li>
       </ul>
-      <div class="more" v-if="commentList.length > 3">
+      <!-- <div class="more" v-if="commentList.length > 3"> -->
+      <div class="more">
         <span>{{ commentMore == false ? "查看更多" : "收起" }}</span>
          <svg v-if="!commentMore" t="1660016230996" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3698" width="16" height="16"><path d="M796.306286 350.354286a47.542857 47.542857 0 0 1 5.485714 60.708571l-5.485714 6.582857L527.36 686.592a47.542857 47.542857 0 0 1-60.708571 5.485714l-6.582858-5.485714L191.122286 417.645714a47.542857 47.542857 0 0 1 60.708571-72.777143l6.582857 5.485715L493.714286 585.728 729.014857 350.354286a47.542857 47.542857 0 0 1 60.708572-5.485715l6.582857 5.485715z" fill="#999999" p-id="3699"></path></svg>
         <svg v-else t="1660016254017" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3863" width="16" height="16"><path d="M227.693714 673.645714a47.542857 47.542857 0 0 1-5.485714-60.708571l5.485714-6.582857L496.64 337.408a47.542857 47.542857 0 0 1 60.708571-5.485714l6.582858 5.485714 268.946285 268.946286a47.542857 47.542857 0 0 1-60.708571 72.777143l-6.582857-5.485715L530.285714 438.272 294.985143 673.645714a47.542857 47.542857 0 0 1-60.708572 5.485715l-6.582857-5.485715z" fill="#999999" p-id="3864"></path></svg>
       </div>
-      <div class="no-data" v-if="commentList.length == 0">暂无评论</div>
+      <!-- <div class="no-data" v-if="commentList.length == 0">暂无评论</div> -->
+      <div class="no-data">暂无评论</div>
     </div>
     <div class="hot-recommend">
       <div class="top-title">

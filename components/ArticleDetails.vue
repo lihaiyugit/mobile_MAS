@@ -10,7 +10,7 @@
           </div>
           <div class="right">{{ detailsData.article.mas_article_addtime }}</div>
         </div>
-        <div class="order-tip" style="display: none">
+        <div class="order-tip" style="display: block">
           您已订阅本文章所属栏目，可畅读栏目所有付费文章
         </div>
         <div
@@ -21,16 +21,17 @@
         ></div>
       </div>
       <!-- "isPay": "Y",---O 不需要购买  Y 已购买  N 未购买 -->
-      <div class="need-pay" v-if="detailsData.articleDetails.isPay == 'N'">
+      <!-- <div class="need-pay" v-if="detailsData.articleDetails.isPay == 'N'"> -->
+      <div class="need-pay" >
         <div class="pay-tip">本文为付费文章，更多精彩内容需付费查看！</div>
         <div class="pay-btn">
           ¥{{ detailsData.articleDetails.price }}阅读文章
         </div>
-        <div class="integral" style="display: none">
+        <div class="integral" style="display: block">
           支付<span>10积分</span>即可阅读当前文章
         </div>
       </div>
-      <div class="renew" style="display: none">
+      <div class="renew" style="display: block">
         <div class="renew-main">
           <div class="renew-tip">注：本文由《管理会计研究》杂志授权刊登</div>
           <div class="renew-btn">
@@ -58,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="open-vip" style="display: none">
+    <div class="open-vip" style="display: block">
       <div class="open-vip-main">
         <div class="tip">畅读学案例栏目所有内容！</div>
         <div class="btn">
@@ -258,7 +259,7 @@ export default {
       commentList: [], //评论列表
       commentMore: false, //是否查看收藏更多
       loginPopupShow: false, //手机号登录弹框
-      articleBuyPopup: false, //文章购买弹框
+      articleBuyPopup: true, //文章购买弹框
       commentVal: "", //评论内容
       isShowComment: false, //是否展示输入框
       isClickComment: false, //是否点击输入框
