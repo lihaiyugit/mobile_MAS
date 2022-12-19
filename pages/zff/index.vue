@@ -299,7 +299,7 @@ export default {
           this.pageIndex = pageIndex;
         } else {
           this.finished = true; // 数据全部加载完成
-          // this.showlaoding = false;
+          this.showlaoding = false;
         }
 
 
