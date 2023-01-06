@@ -344,7 +344,7 @@
             <div class="form-item">
               <input
                 type="text"
-                maxlength="6"
+                maxlength="4"
                 placeholder="请输入验证码"
                 v-model="code"
                 @blur="codeBlur()"
@@ -430,7 +430,7 @@
             <div class="form-item">
               <input
                 type="text"
-                maxlength="6"
+                maxlength="4"
                 placeholder="请输入验证码"
                 v-model="code"
               />

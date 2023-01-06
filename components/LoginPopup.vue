@@ -27,7 +27,7 @@
               <img src="@/static/images/login/mail_1.png" alt="" />
               <input
                 type="text"
-                maxlength="6"
+                maxlength="4"
                 placeholder="请输入验证码"
                 v-model="code"
                 @blur="codeBlur()"
