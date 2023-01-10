@@ -76,7 +76,7 @@
             <div class="tj" v-if="index == 2"><span>推荐订阅</span></div>
             <dt>
               <img class="mark" src="@/static/images/hyfw/plus.png" alt="" />
-              <span class="month">{{ item.month }}个月</span>
+              <span class="month">{{item.month}}个月</span>
               <div class="price">
                 <span class="icon">¥</span>
                 <span class="num">{{ item.price }}</span>
@@ -481,14 +481,14 @@ export default {
       memberType: 2, //会员类型 2 mas会员 1文章
       vipType: 3, //mas会员价格id
       memberList: [
-        { id: 1, money: 1, price: 30 },
-        { id: 2, money: 6, price: 180 },
-        { id: 3, money: 12, price: 360 },
+        { id: 1, month: 1, price: 30 },
+        { id: 2, month: 6, price: 180 },
+        { id: 3, month: 12, price: 360 },
       ], //会员列表
       acticleList: [
-        { id: 4, money: 1, price: 30 },
-        { id: 5, money: 6, price: 180 },
-        { id: 6, money: 12, price: 360 },
+        { id: 4, month: 1, price: 30 },
+        { id: 5, month: 6, price: 180 },
+        { id: 6, month: 12, price: 360 },
       ], //文章列表
       memberprice: "", //会员选中价格
     };

@@ -18,9 +18,9 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'https://develop.chinamas.cn',
+    dev: 'https://admin_test.chinamas.cn',
     // browserDev: '',
-    pro: 'https://develop.chinamas.cn',
+    pro: 'https://admin_test.chinamas.cn',
     // browserPro: '',
   },
 

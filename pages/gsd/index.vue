@@ -137,7 +137,7 @@ export default {
     if (res.bol) {
       return {
         showBookList: res.data.bookType,
-        listData: res.data.bookList.bookList,
+        listData: res.data.bookList,
       };
     }
   },
@@ -195,8 +195,8 @@ export default {
         classMethod: "bookList",
       });
       if (res.bol) {
-        this.listData=res.data.bookList;
-        this.listShowType = res.data.bookList.length ? 1 : 2;
+        this.listData=res.data;
+        this.listShowType = res.data.length ? 1 : 2;
       }else{
         Toast({ duration: 1000, message: res.msg });
       }

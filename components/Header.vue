@@ -607,7 +607,7 @@ export default {
       if (this.code == "") {
         this.errTips = "请输入验证码";
         return false;
-      } else if (/^\d{6}$/.test(this.code) == false) {
+      } else if (/^\d{4}$/.test(this.code) == false) {
         this.errTips = "请输入正确的验证码";
         return false;
       } else {
